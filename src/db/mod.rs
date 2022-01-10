@@ -574,7 +574,7 @@ mod tests {
         ($($fn:ident),*) => {
             $(
                 paste! {
-                    #[tokio::test(flavor = "multi_thread")]
+                    #[tokio::test]
                     async fn [<test_ $fn>]() -> Result<()> {
                         let client = get_client().await?;
 
