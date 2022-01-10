@@ -1,0 +1,15 @@
+drop table product_grape_varieties;
+drop table product_special_features;
+drop table product_categories;
+drop table products;
+drop table producers;
+drop table promoting_agents;
+drop table colors;
+drop table regions;
+drop table countries;
+drop table grape_varieties;
+drop table regulated_designations;
+drop table designations_of_origin;
+drop table classifications;
+drop table special_features;
+drop table categories;
