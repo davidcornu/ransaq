@@ -34,9 +34,15 @@ pub async fn crawl() -> Result<()> {
                     }
                     page_number += 1;
                 }
-                Ok(None) | Err(_) => {
+                // We've hit the last page
+                Ok(None) => {
                     send.close();
                     return Ok(());
+                }
+                // There was an error fetching the current page
+                Err(err) => {
+                    send.close();
+                    return Err(err);
                 }
             }
         }
@@ -68,6 +74,7 @@ pub async fn crawl() -> Result<()> {
                                 continue;
                             }
                         }
+                        // The channel is closed
                         Err(_) => {
                             return Ok(());
                         }
