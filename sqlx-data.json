@@ -1,0 +1,117 @@
+{
+  "db": "SQLite",
+  "10cf53693019431354b74f15858f49a01f25d4c1355114a315e37f7fea95eada": {
+    "query": "insert into product_categories (product_id, category_id)\n                values (?1, ?2) on conflict do update set updated_at=(datetime('now', 'utc'))",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 2
+      },
+      "nullable": []
+    }
+  },
+  "2f1377c4d36ed9a3f23668a3202096f8abc3fa548bc772c9941c6d90b4da14ec": {
+    "query": "delete from product_categories where product_id = ?1 and category_id not in (?2)",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 2
+      },
+      "nullable": []
+    }
+  },
+  "31d097e9547cf44e78aa888c22998063c28d0d06721c6ab1f4ab78c762898edd": {
+    "query": "delete from product_special_features where product_id = ?1 and special_feature_id not in (?2)",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 2
+      },
+      "nullable": []
+    }
+  },
+  "337ae466f43c25916c9c988fbb7ea6b247dda4516ef009736fee21986c4d0617": {
+    "query": "insert into categories (name, url, parent_category_id) values (?1, ?2, ?3)\n            on conflict do update set url=excluded.url, parent_category_id=excluded.parent_category_id \n            where (url != excluded.url or parent_category_id != excluded.parent_category_id)\n            returning id as \"id!\"",
+    "describe": {
+      "columns": [
+        {
+          "name": "id!",
+          "ordinal": 0,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 3
+      },
+      "nullable": [
+        true
+      ]
+    }
+  },
+  "571b55422de42d7d15cf7828be3d550192d3b13218cd64a084f207756749b9f7": {
+    "query": "select id as \"id!\" from categories where name = ?1 limit 1",
+    "describe": {
+      "columns": [
+        {
+          "name": "id!",
+          "ordinal": 0,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 1
+      },
+      "nullable": [
+        true
+      ]
+    }
+  },
+  "73a959b882f65fafcbf0ca14781b8a2fe7cf12e0ed3e59c6a348cb5ecc36430a": {
+    "query": "delete from product_grape_varieties where product_id = ?1 and grape_variety_id not in (?2)",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 2
+      },
+      "nullable": []
+    }
+  },
+  "88c48cfba520023706220ed4b051f6e7fba69c3a7c46214c7c5c0ce6d5da2648": {
+    "query": "insert into product_special_features (product_id, special_feature_id) \n                values (?1, ?2) on conflict do update set updated_at=(datetime('now', 'utc'))",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 2
+      },
+      "nullable": []
+    }
+  },
+  "aa248d8241ee3d27451eb745ddd116269e3109b36b64bd838407fc9a8c4fb21a": {
+    "query": "insert into product_grape_varieties (product_id, grape_variety_id, percentage)\n                values (?1, ?2, ?3) on conflict do update set\n                updated_at=(datetime('now', 'utc')), percentage=excluded.percentage",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 3
+      },
+      "nullable": []
+    }
+  },
+  "c19a3f9c716361f23149941d62a36e5e2356981bce3bf410503a40a7080d8a6a": {
+    "query": "insert into \n            products (\n                abv_percentage,\n                availability, \n                classification_id,\n                color_id, \n                container_count, \n                container_milliliters,\n                country_id, \n                description, \n                designation_of_origin_id,\n                image_url,\n                item_condition, \n                name, \n                price_cad, \n                producer_id, \n                product_of_quebec,\n                promoting_agent_id, \n                region_id,\n                regulated_designation_id, \n                saq_code, \n                sugar_content_equality, \n                sugar_content_grams_per_liter,\n                upc_code\n            )\n            values (\n                ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12,\n                ?13, ?14, ?15, ?16, ?17, ?18, ?19, ?20, ?21, ?22\n            )\n            on conflict do update set\n                updated_at=(datetime('now', 'utc')),\n                abv_percentage=excluded.abv_percentage,\n                availability=excluded.availability, \n                classification_id=excluded.classification_id,\n                color_id=excluded.color_id, \n                container_count=excluded.container_count, \n                container_milliliters=excluded.container_milliliters,\n                country_id=excluded.country_id, \n                description=excluded.description, \n                designation_of_origin_id=excluded.designation_of_origin_id,\n                image_url=excluded.image_url,\n                item_condition=excluded.item_condition, \n                name=excluded.name, \n                price_cad=excluded.price_cad, \n                producer_id=excluded.producer_id, \n                product_of_quebec=excluded.product_of_quebec,\n                promoting_agent_id=excluded.promoting_agent_id, \n                region_id=excluded.region_id,\n                regulated_designation_id=excluded.regulated_designation_id, \n                -- saq_code omitted\n                sugar_content_equality=excluded.sugar_content_equality, \n                sugar_content_grams_per_liter=excluded.sugar_content_grams_per_liter,\n                upc_code=excluded.upc_code\n            returning id as \"id!\"",
+    "describe": {
+      "columns": [
+        {
+          "name": "id!",
+          "ordinal": 0,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 22
+      },
+      "nullable": [
+        true
+      ]
+    }
+  }
+}
