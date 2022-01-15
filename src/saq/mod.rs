@@ -84,10 +84,7 @@ impl Client {
             .map(|e| {
                 let page_number = e.text().collect::<String>();
                 page_number.parse::<u32>().wrap_err_with(|| {
-                    format!(
-                        "failed to convert page number {:?} to integer",
-                        &page_number
-                    )
+                    format!("failed to convert page number {page_number:?} to integer")
                 })
             })
             .next()

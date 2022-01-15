@@ -144,7 +144,7 @@ fn parse_abv(text: &str) -> Result<f32> {
         .ok_or_else(|| eyre!("failed to match {:?}", text))?
         .as_str();
 
-    f32::from_str(num).wrap_err_with(|| format!("failed to parse {:?} as float", num))
+    f32::from_str(num).wrap_err_with(|| format!("failed to parse {num:?} as float"))
 }
 
 /// The product's size
@@ -170,14 +170,14 @@ fn parse_size(text: &str) -> Result<Size> {
     let container_count = match captures.get(2) {
         Some(m) => {
             let num = m.as_str();
-            u8::from_str(num).wrap_err_with(|| format!("failed to parse {:?} as u8", num))?
+            u8::from_str(num).wrap_err_with(|| format!("failed to parse {num:?} as u8"))?
         }
         None => 1,
     };
 
     let num_text = captures.get(3).expect("non-optional capture").as_str();
-    let num = f32::from_str(num_text)
-        .wrap_err_with(|| format!("failed to parse {:?} as f32", num_text))?;
+    let num =
+        f32::from_str(num_text).wrap_err_with(|| format!("failed to parse {num_text:?} as f32"))?;
     let unit = captures.get(5).expect("non-optional capture").as_str();
 
     let container_milliliters = match unit {
@@ -231,8 +231,8 @@ fn parse_sugar_content(text: &str) -> Result<SugarContent> {
     };
 
     let num_text = captures.get(2).expect("non-optional capture").as_str();
-    let grams_per_liter = f32::from_str(num_text)
-        .wrap_err_with(|| format!("failed to parse {:?} as f32", num_text))?;
+    let grams_per_liter =
+        f32::from_str(num_text).wrap_err_with(|| format!("failed to parse {num_text:?} as f32"))?;
 
     Ok(SugarContent {
         equality,
@@ -271,10 +271,7 @@ fn parse_grape_varieties(text: &str) -> Result<Vec<GrapeVariety>> {
             let offset = captures.get(1).expect("non-optional capture").start();
             let percentage_text = captures.get(2).expect("non-optional capture").as_str();
             percentage = Some(u8::from_str(percentage_text).wrap_err_with(|| {
-                format!(
-                    "failed to parse percentage from {:?} ({:?}) as u8",
-                    part, percentage_text
-                )
+                format!("failed to parse percentage from {part:?} ({percentage_text:?}) as u8",)
             })?);
             name = part[0..offset].trim();
         }
