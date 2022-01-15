@@ -28,5 +28,5 @@ jobs:
           git clean -f -X && 
           mv /tmp/cargo-doc/doc/* . &&
           git add . && 
-          git commit -m "Docs build $GITHUB_SHA" --author="Github Actions <no-reply@example.com>" &&
+          git commit --author="GitHub Actions <no-reply@example.com>" -m "Docs build $GITHUB_SHA" &&
           git push origin gh-pages
