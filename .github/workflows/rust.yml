@@ -21,12 +21,14 @@ jobs:
       - name: Build docs
         run: cargo doc --no-deps --target-dir="/tmp/cargo-doc"
       - name: Publish docs
-        run: >
-          set -x &&
-          git fetch origin gh-pages && 
-          git checkout gh-pages && 
-          git clean -f -X && 
-          mv /tmp/cargo-doc/doc/* . &&
-          git add . && 
-          git commit --author="GitHub Actions <no-reply@example.com>" -m "Docs build $GITHUB_SHA" &&
+        run: |
+          set -ex
+          git fetch origin gh-pages
+          git checkout gh-pages
+          git clean -f -X
+          mv /tmp/cargo-doc/doc/* .
+          git add .
+          git config user.name "GitHub Actions"
+          git config user.email "<>"
+          git commit -m "Docs build $GITHUB_SHA"
           git push origin gh-pages
