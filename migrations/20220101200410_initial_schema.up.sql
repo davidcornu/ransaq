@@ -8,7 +8,7 @@ create unique index producers__name on producers(name);
 create table promoting_agents (
   id integer primary key,
   name text not null
-);
+) strict;
 
 create unique index promoting_agents__name on promoting_agents(name);
 
